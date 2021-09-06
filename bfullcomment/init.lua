@@ -1,22 +1,25 @@
 local api = vim.api
 
+local function createComment(langu)
+	print(langu)
+end
 
 local function pasteWord(line)
-	api.nvim_put(line)
+	api.nvim_put({line}, 'l', false, false)
 end
 
 
 local function getText()
 
-	-- Get the current line
-	print(vim.api.nvim_get_current_line())
-
 	local currentline = api.nvim_get_current_line()
+	local filetype = vim.bo.filetype
 
+	print(filetype)
 	api.nvim_del_current_line()
 
-	pasteWord(currentline)
+	createComment(filetype)
 end
+
 
 return{
 	getText = getText
